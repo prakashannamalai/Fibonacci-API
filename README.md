@@ -1,5 +1,5 @@
 # Fibonacci API
-
+Fibonacci API project is developed using NodeJS programming language and hosted in Azure Container App using Azure DevOps pipeline with Bicep template.
 Node.js REST API that returns the nth Fibonacci number.
 
 ## Endpoints
