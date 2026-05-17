@@ -33,7 +33,7 @@ Run the container:
 ```bash
 docker run -p 3000:3000 fibonacci-api
 ```
-## Azure
+## Azure Cloud Environment
 1. Azure Container Registry is used to store the container image.
 2. Azure Containter App is used to host the application with auto-scaling enabled (Consumption profile type is used in this exercise, but Dedicated profile type can be considered for critical business application)
 3. Log Analytics Workspace is used to store Container App's system and console logs
@@ -56,7 +56,6 @@ Steps to create Service Connection
 3. It will provision ACR and Azure Container Apps with Log anlaytics workspace services.
 4. Once the deployment is completed, please update Authentication in Container Apps to "System assigned identity (environment)" connecting to Azure Container Registry (acrPull permission) via Azure portal. Due to time-limitation, I coudln't proceed it with Bicep template.
 
-
 #### Pipeline 2 (Build Docker image and deploy it in Containter App)
 1. Create Azure DevOps pipeline using this existing azure-pipelines.yml and please ensure the value of variables are updated as per Azure environment.
 2. This pipeline will build docker image and push it to Azure Container Registry followed by deploying the image into Azure Container Apps.
@@ -78,8 +77,5 @@ Steps to create Service Connection
 ## AI usage
 
 1. Used GitHub CoPilot for creating NodeJS scripts (REST API) & Bicep template with manual assessment and correction as required. 
-Referred Microsoft document for valdiating Bicep template.
-I was able to assess and validate NodeJS script in my local Docker.
- 
-
+Referred Microsoft document for valdiating Bicep template. I was able to assess and validate NodeJS script in my local Docker.
 2. Used Microsoft Copilot to fix issues in Azure DevOps pipelines. Validated it in test run using my test DevOps organization.
