@@ -34,9 +34,14 @@ Run the container:
 docker run -p 3000:3000 fibonacci-api
 ```
 ## Azure
-
+Azure Container Registry is used to store the container image.
+Azure Containter App is used to host the application with auto-scaling enabled (Consumption profile type is used in this exercise, but Dedicated profile type can be considered for critical business application)
+Log Analytics Workspace is used to store Container App's system and console logs
+System Managed Identity is enabled for Container App to pull the image from Container Registry
 
 ## Azure DevOps (CI/CD pipelines)
+Service Connection is created for ADO pipeline to access/provision Azure Resources.
+
 
 
 
