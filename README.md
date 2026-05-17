@@ -40,7 +40,7 @@ docker run -p 3000:3000 fibonacci-api
 4. System Managed Identity is enabled for Container App to pull the image from Container Registry
 
 ## Azure DevOps (CI/CD pipelines)
-Service Connection
+### Service Connection
 -------------------
 Service Connection is created for ADO pipeline to access/provision Azure Resources.
 Steps to create Service Connection
@@ -50,7 +50,7 @@ Steps to create Service Connection
 4. Select the scope (subscription and Resource Group Name) and provide name for service connection
 5. Grant access permission to pipelne and save
 
-Pipeline 1 (Provisioning Azure Resources)
+### Pipeline 1 (Provisioning Azure Resources)
 ------------------------------------------
 1. Create Azure DevOps pipeline using this existing azure-bicep-pipeline.yml and please ensure the value of variables are updated as per Azure environment.
 2. This pipeline will valdiate "Azure/main.bicep" template and execute if valiation is passed.
@@ -58,7 +58,7 @@ Pipeline 1 (Provisioning Azure Resources)
 4. Once the deployment is completed, please update Authentication in Container Apps to "System assigned identity (environment)" connecting to Azure Container Registry (acrPull permission) via Azure portal. Due to time-limitation, I coudln't proceed it with Bicep template.
 
 
-Pipeline 2 (Build Docker image and deploy it in Containter App)
+### Pipeline 2 (Build Docker image and deploy it in Containter App)
 ----------------------------------------------------------------   
 1. Create Azure DevOps pipeline using this existing azure-pipelines.yml and please ensure the value of variables are updated as per Azure environment.
 2. This pipeline will build docker image and push it to Azure Container Registry followed by deploying the image into Azure Container Apps.
