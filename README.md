@@ -34,14 +34,29 @@ Run the container:
 docker run -p 3000:3000 fibonacci-api
 ```
 ## Azure
-Azure Container Registry is used to store the container image.
-Azure Containter App is used to host the application with auto-scaling enabled (Consumption profile type is used in this exercise, but Dedicated profile type can be considered for critical business application)
-Log Analytics Workspace is used to store Container App's system and console logs
-System Managed Identity is enabled for Container App to pull the image from Container Registry
+1. Azure Container Registry is used to store the container image.
+2. Azure Containter App is used to host the application with auto-scaling enabled (Consumption profile type is used in this exercise, but Dedicated profile type can be considered for critical business application)
+3. Log Analytics Workspace is used to store Container App's system and console logs
+4. System Managed Identity is enabled for Container App to pull the image from Container Registry
 
 ## Azure DevOps (CI/CD pipelines)
+Service Connection
+-------------------
 Service Connection is created for ADO pipeline to access/provision Azure Resources.
+Steps to create Service Connection
+1. Project Settings => Service Connection.
+2. New Service Connection => Choose "Azure Resource Manager"
+3. Choose "App Registration" as Identity type, Workload Identity Federation as Credential
+4. Select the scope (subscription and Resource Group Name) and provide name for service connection
+5. Grant access permission to pipelne and save
 
+Pipeline 1 (Provisioning Azure Resources)
+------------------------------------------
+
+
+
+Pipeline 2 (Build Docker image and deploy it in Containter App)
+----------------------------------------------------------------   
 
 
 
