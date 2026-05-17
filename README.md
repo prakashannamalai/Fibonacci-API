@@ -52,12 +52,16 @@ Steps to create Service Connection
 
 Pipeline 1 (Provisioning Azure Resources)
 ------------------------------------------
-
+1. Create Azure DevOps pipeline using this existing azure-bicep-pipeline.yml and please ensure the value of variables are updated as per Azure environment.
+2. This pipeline will valdiate "Azure/main.bicep" template and execute if valiation is passed.
+3. It will provision ACR and Azure Container Apps with Log anlaytics workspace services.
+4. Once the deployment is completed, please update Authentication in Container Apps to "System assigned identity (environment)" connecting to Azure Container Registry (acrPull permission) via Azure portal. Due to time-limitation, I coudln't proceed it with Bicep template.
 
 
 Pipeline 2 (Build Docker image and deploy it in Containter App)
 ----------------------------------------------------------------   
-
+1. Create Azure DevOps pipeline using this existing azure-pipelines.yml and please ensure the value of variables are updated as per Azure environment.
+2. This pipeline will build docker image and push it to Azure Container Registry followed by deploying the image into Azure Container Apps.
 
 
 ## Logs/monitoring
