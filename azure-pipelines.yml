@@ -1,1 +1,61 @@
 
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  azureServiceConnection: '<Service Connection Name>'
+  acrName: '<acr Name>'
+  containerAppName: '<Container App Name>'
+  resourceGroup: '<RG Name>'
+
+  dockerRegistryServiceConnection: '<46c9942a-XXXXXXXXXXXXXXXX>'
+  imageRepository: '<Image Repo Name>'
+  containerRegistry: '<ACR URL>'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+- stage: Deploy
+  displayName: Deploy to Container App
+  dependsOn: Build
+  jobs:
+  - job: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: AzureContainerApps@1
+      inputs:
+        azureSubscription: $(azureServiceConnection)
+        acrName: $(acrName)
+        imageToDeploy: $(acrName).azurecr.io/$(imageRepository):$(tag)
+        containerAppName: $(containerAppName)
+        resourceGroup: $(resourceGroup)
